@@ -56,24 +56,32 @@ public class Context<T> : IContext<T>
         }
     }
 
-    public void Add<T1>() where T1 : T, new()
+    public T1 Add<T1>() where T1 : T, new()
     {
-        Add(new T1());
+        var item = new T1();
+        Add(item);
+        return item;
     }
 
-    public void Add<T1>(params object[] data) where T1 : T, IInitable, new()
+    public T1 Add<T1>(params object[] data) where T1 : T, IInitable, new()
     {
-        Add(IInitable.Initialize<T1>(data));
+        var item = IInitable.Initialize<T1>(data);
+        Add(item);
+        return item;
     }
 
-    public void Add<T1, T2>(params T2[] data) where T1 : T, IInitable<T2>, new()
+    public T1 Add<T1, T2>(params T2[] data) where T1 : T, IInitable<T2>, new()
     {
-        Add(IInitable<T2>.Initialize<T1>(data));
+        var item = IInitable<T2>.Initialize<T1>(data);
+        Add(item);
+        return item;
     }
 
-    public void Add<T1>(Func<object, T1> action, params object[] data) where T1 : T, IInitable, new()
+    public T1 Add<T1>(Func<object, T1> action, params object[] data) where T1 : T, IInitable, new()
     {
-        Add(IInitable.Initialize(action, data));
+        var item = IInitable.Initialize(action, data);
+        Add(item);
+        return item;
     }
 
     public void Remove<T1>() where T1 : T
