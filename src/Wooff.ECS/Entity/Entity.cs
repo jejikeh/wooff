@@ -3,7 +3,7 @@ using Wooff.ECS.Context;
 
 namespace Wooff.ECS.Entity;
 
-public class Entity : Context<IComponent>, IEntity
+public abstract class Entity : Context<IComponent>, IEntity
 {
     public void Update(float timeScale)
     {
