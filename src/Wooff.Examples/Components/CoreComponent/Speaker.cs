@@ -7,11 +7,6 @@ public class Speaker : IComponent<SpeakerData>
 {
     public string Message { get; set; } = string.Empty;
 
-    public void Update(float timeScale)
-    {
-        Console.WriteLine("Update: Speaker");
-    }
-
     public IInitable Init(params object[] data)
     {
         foreach (var obj in data)

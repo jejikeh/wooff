@@ -9,11 +9,6 @@ public class Transform : IComponent
     public float Y { get; set; }
     public float Z { get; set; }
 
-    public void Update(float timeScale)
-    {
-        Console.WriteLine("Transform");
-    }
-
     public IInitable Init(params object[] data)
     {
         X = (float)data[0];

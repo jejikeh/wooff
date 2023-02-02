@@ -9,4 +9,5 @@ public interface IContext<T> : ICollection<T>
     public T1 Add<T1>(Func<object, T1> action,params object[] data) where T1 : T, IInitable, new();
     public void Remove<T1>() where T1 : T;
     public T1 Get<T1>() where T1 : class, T;
+    public List<List<T>> SplitIntoChunks(int chunkSize);
 }

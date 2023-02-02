@@ -9,4 +9,13 @@ public class EntityContext : Context<IEntity>, IUpdateable
         foreach (var entity in this)
             entity.Update(timeScale);
     }
+
+    public async Task UpdateParallelAsync(float timeScale)
+    {
+        await Parallel.ForEachAsync(SplitIntoChunks(8), async (chunk, token)  =>
+        {
+            await chunk.ParallelForEachAsync(async entity => await entity.UpdateParallelAsync(timeScale));
+            Console.WriteLine("-----------------");
+        });
+    }
 }

@@ -5,12 +5,13 @@ namespace Wooff.ECS.Entity;
 
 public abstract class Entity : Context<IComponent>, IEntity
 {
-    public void Update(float timeScale)
-    {
-        foreach (var component in this)
-            component.Update(timeScale);
-    }
+    public virtual void Update(float timeScale) { }
     
+    public virtual Task UpdateParallelAsync(float timeScale)
+    { 
+        return Task.Run(() => Update(timeScale));
+    }
+
     public IInitable<IComponent> Init(params IComponent[] data)
     {
         foreach (var component in data)

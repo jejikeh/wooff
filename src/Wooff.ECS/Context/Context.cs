@@ -98,4 +98,22 @@ public class Context<T> : IContext<T>
 
         return item;
     }
+
+    public List<List<T>> SplitIntoChunks(int chunkSize)
+    {
+        if (chunkSize <= 0)
+            throw new ArgumentException("chunkSize must be greater than 0.");
+
+        var retVal = new List<List<T>>();
+        var index = 0;
+        while (index < _items.Count)
+        {
+            var count = _items.Count - index > chunkSize ? chunkSize : _items.Count - index;
+            retVal.Add(_items.GetRange(index, count));
+
+            index += chunkSize;
+        }
+
+        return retVal;
+    }
 }
