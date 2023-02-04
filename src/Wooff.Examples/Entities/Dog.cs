@@ -24,7 +24,8 @@ public class Dog : Entity<DogData>
         return this;
     }
 
-    public void WhoAmIm(){
+    public void WhoAmIm()
+    {
         Console.WriteLine($"Name: {_name}\nAge: {_age}");
     }
 }

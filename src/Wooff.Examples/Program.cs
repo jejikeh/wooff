@@ -22,7 +22,8 @@ internal class Program
         }
     }
 
-    private static string HashToString(int hash, int asciiShift = 97, int asciiWidth = 17){
+    private static string HashToString(int hash, int asciiShift = 97, int asciiWidth = 17)
+    {
         var random = new Random();
         var resultString = string.Empty;
         var digits = hash == 0L ? 1 : (hash > 0L ? 1 : 2) + (int)Math.Log10(Math.Abs((double)hash));
