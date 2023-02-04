@@ -30,6 +30,12 @@ public class Context<T> : IContext<T>
     {
         return _items.Contains(item);
     }
+    
+    public bool Contains<T1>() where T1 : T
+    {
+        var item = _items.Any(x => x?.GetType() == typeof(T1));
+        return item;
+    }
 
     public void CopyTo(T[] array, int arrayIndex)
     {
@@ -56,28 +62,37 @@ public class Context<T> : IContext<T>
         }
     }
 
-    public T1 Add<T1>() where T1 : T, new()
+    public List<T1?> GetAll<T1>() where T1 : class, T, new()
+    {
+        var itemList = _items.Where(entity => entity?.GetType() == typeof(T1)).Select(x => x as T1);
+        if (itemList is null)
+            throw new NullReferenceException($"{typeof(T1).FullName} item does not exist");
+
+        return itemList.ToList();
+    }
+
+    public T1 Add<T1>() where T1 :  T, new()
     {
         var item = new T1();
         Add(item);
         return item;
     }
 
-    public T1 Add<T1>(params object[] data) where T1 : T, IInitable, new()
+    public T1 Add<T1>(params object[] data) where T1 :  T, IInitable, new()
     {
         var item = IInitable.Initialize<T1>(data);
         Add(item);
         return item;
     }
 
-    public T1 Add<T1, T2>(params T2[] data) where T1 : T, IInitable<T2>, new()
+    public T1 Add<T1, T2>(params T2[] data) where T1 :  T, IInitable<T2>, new()
     {
         var item = IInitable<T2>.Initialize<T1>(data);
         Add(item);
         return item;
     }
 
-    public T1 Add<T1>(Func<object, T1> action, params object[] data) where T1 : T, IInitable, new()
+    public T1 Add<T1>(Func<object[], T1> action, params object[] data) where T1 :  T, IInitable, new()
     {
         var item = IInitable.Initialize(action, data);
         Add(item);

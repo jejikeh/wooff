@@ -12,7 +12,7 @@ public class EntityContext : Context<IEntity>, IUpdateable
 
     public async Task UpdateParallelAsync(float timeScale)
     {
-        await Parallel.ForEachAsync(SplitIntoChunks(8), async (chunk, token)  =>
+        await Parallel.ForEachAsync(SplitIntoChunks(4), async (chunk, token)  =>
         {
             await chunk.ParallelForEachAsync(async entity => await entity.UpdateParallelAsync(timeScale));
             Console.WriteLine("-----------------");
