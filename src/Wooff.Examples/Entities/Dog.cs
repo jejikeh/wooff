@@ -1,33 +1,22 @@
-using System.Security.Cryptography;
-using System.Text;
+using Wooff.ECS;
+using Wooff.ECS.Component;
 using Wooff.ECS.Entity;
 using Wooff.Examples.Components.CoreComponent;
 
 namespace Wooff.Examples.Entities;
 
-public class Dog : Entity
+public class Dog : Entity<int>
 {
+    public int Del = 1;
+    
     public Dog()
     {
-        Add<Speaker, SpeakerData>(new SpeakerData()
-        {
-            Message = "\n\tHello, im am a Speaker Component\n"
-        });
+        Add<Transform>(x => new Transform((float)x[0], (float)x[1], (float)x[2]), 3f, 4f, 5f);
     }
 
-    public override void Update(float timeScale)
+    public override IInitable<int> Init(params int[] data)
     {
-        var s = new Random().Next(100000000).ToString();
-        var temp = Encoding.ASCII.GetBytes(s);
-        var tmpHash = new MD5CryptoServiceProvider().ComputeHash(temp);
-        Console.WriteLine(tmpHash.GetHashCode());
-    }
-
-    public override async Task UpdateParallelAsync(float timeScale)
-    {
-        var s = new Random().Next(100000000).ToString();
-        var temp = Encoding.ASCII.GetBytes(s);
-        var tmpHash = new MD5CryptoServiceProvider().ComputeHash(temp);
-        Console.WriteLine(tmpHash.GetHashCode());
+        Del = data[0];
+        return this;
     }
 }

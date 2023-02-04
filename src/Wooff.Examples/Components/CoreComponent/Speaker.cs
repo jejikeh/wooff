@@ -27,6 +27,11 @@ public class Speaker : IComponent<SpeakerData>
 
         return this;
     }
+
+    public void Speak()
+    {
+        Console.WriteLine(Message);
+    }
 }
 
 public class SpeakerData
