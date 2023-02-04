@@ -48,6 +48,12 @@ public abstract class Entity : Context<IComponent>, IEntity<IComponent>
         return this;
     }
 
+    public IInitable<IComponent> Init(IComponent data)
+    {
+        Add(data);
+        return this;
+    }
+
     public IInitable<IComponent> Init(params IComponent[] data)
     {
         foreach (var component in data)
@@ -59,5 +65,27 @@ public abstract class Entity : Context<IComponent>, IEntity<IComponent>
 
 public abstract class Entity<T> : Entity, IEntity<T>
 {
+    public abstract IInitable<T> Init(T data);
+
     public abstract IInitable<T> Init(params T[] data);
+}
+
+public abstract class Entity<T, T1> : Entity, IEntity<T, T1>
+{
+    public abstract IInitable<T, T1> Init(T dataT, T1 dataT1);
+}
+
+public abstract class Entity<T, T1, T2> : Entity, IEntity<T, T1, T2>
+{
+    public abstract IInitable<T, T1, T2> Init(T dataT, T1 dataT1, T2 dataT2);
+}
+
+public abstract class Entity<T, T1, T2, T3> : Entity, IEntity<T, T1, T2, T3>
+{
+    public abstract IInitable<T, T1, T2, T3> Init(T dataT, T1 dataT1, T2 dataT2, T3 dataT3);
+}
+
+public abstract class Entity<T, T1, T2, T3, T4> : Entity, IEntity<T, T1, T2, T3, T4>
+{
+    public abstract IInitable<T, T1, T2, T3, T4> Init(T dataT, T1 dataT1, T2 dataT2, T3 dataT3, T4 dataT4);
 }
