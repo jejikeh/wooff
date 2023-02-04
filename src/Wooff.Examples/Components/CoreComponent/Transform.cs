@@ -3,7 +3,7 @@ using Wooff.ECS.Component;
 
 namespace Wooff.Examples.Components.CoreComponent;
 
-public class Transform : IComponent<float>
+public class Transform : IComponent<float[]>
 {
     public float X { get; set; }
     public float Y { get; set; }
@@ -29,8 +29,8 @@ public class Transform : IComponent<float>
 
         return this;
     }
-
-    public IInitable<float> Init(params float[] data)
+    
+    public IInitable<float[]> Init(params float[] data)
     {
         X = data[0];
         Y = data[1];

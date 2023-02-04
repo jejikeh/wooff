@@ -1,35 +1,29 @@
-﻿using Wooff.Examples.Components.CoreComponent;
+using Wooff.Examples.Components;
+using Wooff.Examples.Components.CoreComponent;
 using Wooff.Examples.Entities;
 using Wooff.Examples.Worlds;
 
-internal class Program
+namespace Wooff.Examples;
+
+public static class Program
 {
-    private static void Main(string[] args)
+    public static void Main()
     {
         var world = new Park();
-        foreach(var i in Enumerable.Range(0,10))
-            world.EntityContext.Add<Dog, DogData>(new DogData() {
-                Name = HashToString(new Random().Next(100000000)),
-                Age = ((char)((byte)new Random().Next()))
-            }).Add<Speaker, SpeakerData>(new SpeakerData()
-                {
-                    Message = "Hello World"
-                });
+        world.EntityContext.Add<Dog, Information, InformationData, Transform, float[], Speaker, SpeakerData>(
+            new InformationData() { Name = "Hall"}, new float[] { 2f, 3f, 4f }, new SpeakerData() { Message = "hi, i am a little message"});
 
-        foreach (var tempDog in world.EntityContext.GetAll<Dog>()) {
-            tempDog?.Get<Speaker>().Speak();
-            tempDog?.WhoAmIm();
-        }
-    }
+        world.EntityContext.AddDog(
+            new InformationData() { Name = "Halley", Description = "Its a small dog, very small in fact" },
+            new SpeakerData() { Message = "hello, im a very small dog Halley" },
+            1f, 2f, 3f);
 
-    private static string HashToString(int hash, int asciiShift = 97, int asciiWidth = 17)
-    {
-        var random = new Random();
-        var resultString = string.Empty;
-        var digits = hash == 0L ? 1 : (hash > 0L ? 1 : 2) + (int)Math.Log10(Math.Abs((double)hash));
-        foreach(var _ in Enumerable.Range(0, digits))
-            resultString += (char)(((int)(hash / (Math.Pow(10, random.Next(digits)))) % 10) + (random.Next(asciiWidth) + asciiShift));
+        foreach (var dog in world.EntityContext.GetAll<Dog>())
+            dog?.WhoAmIm();
 
-        return resultString;
+        world.EntityContext.GetFirst<Dog>().Remove<Information>();
+        
+        foreach (var dog in world.EntityContext.GetAll<Dog>())
+            dog?.WhoAmIm();
     }
 }

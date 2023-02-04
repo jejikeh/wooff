@@ -1,36 +1,43 @@
 using Wooff.ECS;
+using Wooff.ECS.Context;
 using Wooff.ECS.Entity;
+using Wooff.Examples.Components;
 using Wooff.Examples.Components.CoreComponent;
 
 namespace Wooff.Examples.Entities;
 
-public class Dog : Entity<DogData>
+public class Dog : Entity<Information, Transform, Speaker>
 {
-    private string _name = "not set";
-    private int _age;
-    
-    public Dog()
-    {
-        Add<Transform>(x => new Transform((float)x[0], (float)x[1], (float)x[2]), 3f, 4f, 5f);
-    }
-
-    public override IInitable<DogData> Init(params DogData[] data)
-    {
-        foreach(var dogData in data){
-            _name = dogData.Name;
-            _age = dogData.Age;
-        }
-            
-        return this;
-    }
-
     public void WhoAmIm()
     {
-        Console.WriteLine($"Name: {_name}\nAge: {_age}");
+        var information = GetFirstNullable<Information>();
+        Console.WriteLine($"INFORMATION COMPONENT\nName: {information?.Data.Name}\tAge: {information?.Data.Description}");
+        
+        var transform = GetFirst<Transform>();
+        Console.WriteLine($"TRANSFORM COMPONENT\nX: {transform.X}\tY: {transform.Y}\tZ: {transform.Z}");
+
+        var speaker = GetFirst<Speaker>();
+        Console.WriteLine($"SPEAKER COMPONENT\nSpeak: {speaker.Message}");
+        speaker.Speak();
+        Console.WriteLine("--- --- --- --- --- --- ---");
+    }
+
+    public override IInitable<Information, Transform, Speaker> Init(Information dataT, Transform dataT1, Speaker dataT2)
+    {
+        Add(dataT);
+        Add(dataT1);
+        Add(dataT2);
+
+        return this;
     }
 }
 
-public class DogData {
-    public string Name {get; set;} = "Not set";
-    public int Age {get; set;}
+public static class DogExt 
+{
+    public static Dog AddDog(this IContext<IEntity> context, InformationData informationData, SpeakerData speakerData,
+        params float[] transformData)
+    {
+        var dog = context.Add<Dog, Information, InformationData,Transform, float[], Speaker, SpeakerData>(informationData,transformData, speakerData);
+        return dog;
+    }
 }

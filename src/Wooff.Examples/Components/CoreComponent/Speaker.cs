@@ -20,10 +20,16 @@ public class Speaker : IComponent<SpeakerData>
         return this;
     }
 
+    public IInitable<SpeakerData> Init(SpeakerData data)
+    {
+        Message = data.Message;
+        return this;
+    }
+
     public IInitable<SpeakerData> Init(params SpeakerData[] data)
     {
-        foreach (var obstacleData in data)
-            Message = obstacleData.Message;
+        foreach (var speakerData in data)
+            Message = speakerData.Message;
 
         return this;
     }
@@ -34,7 +40,7 @@ public class Speaker : IComponent<SpeakerData>
     }
 }
 
-public class SpeakerData
+public struct SpeakerData
 {
-    public string Message { get; set; }
+    public string Message { get; init; }
 }
