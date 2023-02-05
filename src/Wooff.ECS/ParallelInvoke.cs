@@ -1,28 +1,34 @@
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Wooff.ECS;
-
-public static class ParallelInvoke
+namespace Wooff.ECS
 {
-    public static Task ParallelForEachAsync<T>(this IEnumerable<T> source, Func<T, Task> funcBody, int maxDoP = 4)
+
+    public static class ParallelInvoke
     {
-        async Task AwaitPartition(IEnumerator<T> partition)
+        public static Task ParallelForEachAsync<T>(this IEnumerable<T> source, Func<T, Task> funcBody, int maxDoP = 4)
         {
-            using (partition)
+            async Task AwaitPartition(IEnumerator<T> partition)
             {
-                while (partition.MoveNext())
+                using (partition)
                 {
-                    await Task.Yield();
-                    await funcBody(partition.Current);
+                    while (partition.MoveNext())
+                    {
+                        await Task.Yield();
+                        await funcBody(partition.Current);
+                    }
                 }
             }
-        }
 
-        return Task.WhenAll(
-            Partitioner
-                .Create(source)
-                .GetPartitions(maxDoP)
-                .AsParallel()
-                .Select(AwaitPartition));
+            return Task.WhenAll(
+                Partitioner
+                    .Create(source)
+                    .GetPartitions(maxDoP)
+                    .AsParallel()
+                    .Select(AwaitPartition));
+        }
     }
 }

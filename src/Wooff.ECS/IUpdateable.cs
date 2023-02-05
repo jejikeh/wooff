@@ -1,13 +1,17 @@
-namespace Wooff.ECS;
+using System.Threading.Tasks;
 
-public interface IUpdateable
+namespace Wooff.ECS
 {
-    public void Update(float timeScale);
-    public Task UpdateParallelAsync(float timeScale);
 
-    public Task UpdateTaskWrapper(float timeScale)
+    public interface IUpdateable
     {
-        Update(timeScale);
-        return Task.CompletedTask;
+        public void Update(float timeScale);
+        public Task UpdateParallelAsync(float timeScale);
+
+        public Task UpdateTaskWrapper(float timeScale)
+        {
+            Update(timeScale);
+            return Task.CompletedTask;
+        }
     }
 }

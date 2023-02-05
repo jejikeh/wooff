@@ -1,10 +1,12 @@
-namespace Wooff.ECS.Component;
-
-public interface IComponent: IInitable
+namespace Wooff.ECS.Component
 {
-}
 
-public interface IComponent<T> : IComponent, IInitable<T>
-{
-    
+    public interface IComponent : IInitable
+    {
+    }
+
+    public interface IComponent<T> : IComponent, IInitable<T>
+    {
+
+    }
 }
