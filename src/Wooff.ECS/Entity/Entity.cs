@@ -42,9 +42,7 @@ namespace Wooff.ECS.Entity
 
         // TODO: add new overrides for ContextAdd method
 
-        public virtual void Update(float timeScale)
-        {
-        }
+        public virtual void Update(float timeScale) { }
 
         public virtual Task UpdateParallelAsync(float timeScale)
         {

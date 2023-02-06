@@ -1,21 +1,12 @@
-using System.Threading.Tasks;
-using Wooff.ECS.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using Wooff.ECS.Component;
+using Wooff.ECS.Context;
 
-namespace Wooff.ECS.Context
+namespace Wooff.ECS.Entity
 {
 
-    public class EntityContext : Context<IEntity>, IUpdateable
+    public class EntityContext : UpdateableContext<IEntity>
     {
-        public void Update(float timeScale)
-        {
-            foreach (var entity in this)
-                entity.Update(timeScale);
-        }
-
-        public async Task UpdateParallelAsync(float timeScale)
-        {
-            foreach (var chunk in SplitIntoChunks(4))
-                await chunk.ParallelForEachAsync(async entity => await entity.UpdateParallelAsync(timeScale));
-        }
     }
 }
