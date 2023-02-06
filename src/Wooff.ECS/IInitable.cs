@@ -32,13 +32,6 @@ namespace Wooff.ECS
             item.Init(data);
             return item;
         }
-
-        public static T1 Initialize<T1>(params T[] data) where T1 : IInitable<T>, new()
-        {
-            var item = new T1();
-            item.Init(data);
-            return item;
-        }
     }
 
     public interface IInitable<T, T1> : IInitable

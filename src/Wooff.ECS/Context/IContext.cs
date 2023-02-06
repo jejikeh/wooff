@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Wooff.ECS.Context
 {
@@ -8,7 +9,7 @@ namespace Wooff.ECS.Context
     {
         public T1 Add<T1>() where T1 : T, new();
         public T1 Add<T1>(params object[] data) where T1 : T, IInitable, new();
-        public T1 Add<T1, T2>(params T2[] data) where T1 : T, IInitable<T2>, new();
+        public T1 Add<T1, T2>(T2 data) where T1 : T, IInitable<T2>, new();
         public T1 Add<T1, T2, T3>(T2 dataT, T3 dataT1) where T1 : T, IInitable<T2, T3>, new();
         public T1 Add<T1, T2, T3, T4>(T2 dataT, T3 dataT1, T4 dataT2) where T1 : T, IInitable<T2, T3, T4>, new();
 

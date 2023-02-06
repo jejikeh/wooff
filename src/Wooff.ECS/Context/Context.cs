@@ -88,8 +88,8 @@ namespace Wooff.ECS.Context
             Add(item);
             return item;
         }
-
-        public T1 Add<T1, T2>(params T2[] data) where T1 : T, IInitable<T2>, new()
+        
+        public T1 Add<T1, T2>(T2 data) where T1 : T, IInitable<T2>, new()
         {
             var item = IInitable<T2>.Initialize<T1>(data);
             Add(item);

@@ -29,7 +29,7 @@ namespace Wooff.ECS.Entity
             return parsedComponent;
         }
 
-        public new T1 Add<T1, T2>(params T2[] data) where T1 : IComponent, IInitable<T2>, new()
+        public new T1 Add<T1, T2>(T2 data) where T1 : IComponent, IInitable<T2>, new()
         {
             var item = IInitable<T2>.Initialize<T1>(data) as IComponent;
             if (item is not T1 parsedComponent || Contains<T1>())
@@ -74,8 +74,6 @@ namespace Wooff.ECS.Entity
     public abstract class Entity<T> : Entity, IEntity<T>
     {
         public abstract IInitable<T> Init(T data);
-
-        public abstract IInitable<T> Init(params T[] data);
     }
 
     public abstract class Entity<T, T1> : Entity, IEntity<T, T1>
