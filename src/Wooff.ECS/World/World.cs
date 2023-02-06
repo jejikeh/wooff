@@ -1,4 +1,6 @@
+using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Wooff.ECS.Context;
 using Wooff.ECS.Entity;
 
@@ -23,6 +25,20 @@ namespace Wooff.ECS.World
         public async Task UpdateParallelAsync(float timeScale)
         {
             await _entityContextUpdate?.UpdateParallelAsync(timeScale)!;
+        }
+        
+        public async Task Save()
+        {
+            await File.WriteAllTextAsync(
+                "t.json",
+                JsonConvert.SerializeObject(this,
+                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented}));
+        }
+        
+        public static async Task<T> Load<T>() where T : World
+        {
+            return JsonConvert.DeserializeObject<T>(await File.ReadAllTextAsync("t.json"), 
+                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
         }
     }
 }
