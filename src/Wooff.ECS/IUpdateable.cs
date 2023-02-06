@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 
 namespace Wooff.ECS
 {
-
     public interface IUpdateable
     {
         public void Update(float timeScale);
@@ -13,5 +12,11 @@ namespace Wooff.ECS
             Update(timeScale);
             return Task.CompletedTask;
         }
+    }
+
+    public interface IUpdateable<in T> : IUpdateable
+    {
+        public void Update(float timeScale, T data);
+        public Task UpdateParallelAsync(float timeScale, T data);
     }
 }
