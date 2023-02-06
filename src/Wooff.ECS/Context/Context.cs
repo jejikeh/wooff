@@ -54,7 +54,7 @@ namespace Wooff.ECS.Context
         public int Count => _items.Count;
         public bool IsReadOnly => false;
 
-        public List<T> this[Type type]
+        private List<T> this[Type type]
         {
             get
             {

@@ -53,6 +53,8 @@ namespace Wooff.ECS.Context
         public T1 Add<T1>(Func<object[], T1> action, params object[] data) where T1 : T, IInitable, new();
         public void Remove<T1>() where T1 : T;
         public T1 GetFirst<T1>() where T1 : class, T;
+        public T1? GetFirstNullable<T1>() where T1 : class, T;
+        public bool Contains<T1>() where T1 : T;
         public List<T1?> GetAll<T1>() where T1 : class, T, new();
         public List<List<T>> SplitIntoChunks(int chunkSize);
     }
