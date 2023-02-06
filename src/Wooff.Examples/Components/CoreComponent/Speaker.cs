@@ -4,7 +4,6 @@ using Wooff.ECS.Component;
 
 namespace Wooff.Examples.Components.CoreComponent
 {
-
     public class Speaker : IComponent<SpeakerData>
     {
         public string Message { get; set; } = string.Empty;

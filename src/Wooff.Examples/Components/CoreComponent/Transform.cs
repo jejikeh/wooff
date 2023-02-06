@@ -3,7 +3,6 @@ using Wooff.ECS.Component;
 
 namespace Wooff.Examples.Components.CoreComponent
 {
-
     public class Transform : IComponent<float[]>
     {
         public float X { get; set; }

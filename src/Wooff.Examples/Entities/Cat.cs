@@ -1,4 +1,5 @@
 using Wooff.ECS;
+using Wooff.ECS.Context;
 using Wooff.ECS.Entity;
 using Wooff.Examples.Components.CoreComponent;
 
@@ -10,5 +11,14 @@ public class Cat : Entity<Speaker>
     {
         Add(data);
         return this;
+    }
+}
+
+public static class CatExt
+{
+    public static Cat AddCat(this IContext<IEntity> context, SpeakerData speakerData)
+    {
+        var cat = context.Add<Cat, Speaker, SpeakerData>(speakerData);
+        return cat;
     }
 }
