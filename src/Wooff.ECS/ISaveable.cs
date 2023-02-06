@@ -1,9 +1,12 @@
+using System.Threading.Tasks;
+
 namespace Wooff.ECS
 {
 
     public interface ISaveable<T>
     {
-        public void Save();
+        public T Data { get; }
+        public Task Save();
         public bool Load(T save);
     }
 }
