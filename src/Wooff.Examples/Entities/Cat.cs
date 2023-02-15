@@ -1,24 +1,20 @@
 using Wooff.ECS;
-using Wooff.ECS.Context;
-using Wooff.ECS.Entity;
-using Wooff.Examples.Components.CoreComponent;
+using Wooff.ECS.Entities;
+using Wooff.Examples.Components;
 
 namespace Wooff.Examples.Entities;
 
-public class Cat : Entity<Speaker>
+public class Cat : Entity
 {
-    public override IInitable<Speaker> Init(Speaker data)
+    public Cat(string descripton, string name)
     {
-        Add(data);
-        return this;
-    }
-}
-
-public static class CatExt
-{
-    public static Cat AddCat(this IContext<IEntity> context, SpeakerData speakerData)
-    {
-        var cat = context.Add<Cat, Speaker, SpeakerData>(speakerData);
-        return cat;
+        ContextAdd(
+            new Information(
+                new InformationData() {
+                    Description = descripton,
+                    Name = name
+                },
+                this
+            ));
     }
 }

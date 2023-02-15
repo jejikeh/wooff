@@ -1,38 +1,28 @@
-
+using System;
 using Wooff.ECS;
-using Wooff.ECS.Component;
+using Wooff.ECS.Components;
+using Wooff.ECS.Entities;
 
 namespace Wooff.Examples.Components
 {
-    public class Information : IComponent<InformationData>
+    public class Information : Component<InformationData>, IComponent<IConfig>
     {
-        public InformationData Data;
-
-        public IInitable Init(params object[] data)
+        public Information(InformationData data, IEntity handler) : base(data, handler)
         {
-            foreach (var obj in data)
-                if (obj is InformationData informationData)
-                    Data = informationData;
-
-            return this;
         }
 
-        public IInitable<InformationData> Init(InformationData data)
+        public void WhoAmIm()
         {
-            Data = data;
-            return this;
+            Console.WriteLine(Config.Description + Config.Name);
         }
 
-        public IInitable<InformationData> Init(params InformationData[] data)
-        {
-            Data = data[0];
-            return this;
-        }
+        public override int GetId() => 1;
+        IConfig IConfigurable<IConfig>.Config => Config;
     }
 
-    public struct InformationData
+    public class InformationData : IConfig
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }
