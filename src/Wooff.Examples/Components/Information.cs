@@ -1,13 +1,12 @@
 using System;
 using Wooff.ECS;
 using Wooff.ECS.Components;
-using Wooff.ECS.Entities;
 
 namespace Wooff.Examples.Components
 {
-    public class Information : Component<InformationData>, IComponent<IConfig>
+    public class Information : Component<InformationData, IExampleEntity>, IComponent<IConfig, IExampleEntity>, IComponent<InformationData, IExampleEntity>
     {
-        public Information(InformationData data, IEntity handler) : base(data, handler)
+        public Information(InformationData data, IExampleEntity handler) : base(data, handler)
         {
         }
 
@@ -16,7 +15,6 @@ namespace Wooff.Examples.Components
             Console.WriteLine(Config.Description + Config.Name);
         }
 
-        public override int GetId() => 1;
         IConfig IConfigurable<IConfig>.Config => Config;
     }
 

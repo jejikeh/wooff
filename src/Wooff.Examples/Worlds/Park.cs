@@ -8,10 +8,10 @@ using Wooff.Examples.System;
 
 namespace Wooff.Examples.Worlds
 {
-    public class Park : IWorld
+    public class Park : IWorld<IExampleEntity, IExampleSystem>
     {
-        public IContext<IEntity, List<IEntity>> EntityContext { get; } = new EntityContext();
-        public IContext<ISystem, HashSet<ISystem>> SystemContext { get; } = new SystemContext();
+        public IContext<IExampleEntity, List<IExampleEntity>> EntityContext { get; } = new EntityContext<IExampleEntity>();
+        public IContext<IExampleSystem, HashSet<IExampleSystem>> SystemContext { get; } = new SystemContext<IExampleSystem, IExampleEntity>();
 
         public Park()
         {
@@ -20,7 +20,7 @@ namespace Wooff.Examples.Worlds
 
         public void Update(float timeScale)
         {
-            (SystemContext as IProcessable<IContext<IEntity, List<IEntity>>>)?.Process(timeScale, EntityContext);
+            (SystemContext as IProcessable<IContext<IExampleEntity, List<IExampleEntity>>>)?.Process(timeScale, EntityContext);
         }
     }
 }
