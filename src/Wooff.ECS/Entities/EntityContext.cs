@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Wooff.ECS.Context;
+using Wooff.ECS.Contexts;
 
 namespace Wooff.ECS.Entities 
 {

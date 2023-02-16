@@ -1,6 +1,7 @@
-namespace Wooff.ECS.Context 
+namespace Wooff.ECS.Contexts 
 {
     public interface IContextItem 
     {
+        
     }
 }

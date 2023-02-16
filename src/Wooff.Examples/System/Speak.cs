@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Wooff.ECS;
-using Wooff.ECS.Context;
+using Wooff.ECS.Contexts;
 using Wooff.ECS.Entities;
 using Wooff.Examples.Components;
 

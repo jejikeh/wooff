@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Wooff.ECS.Context 
+namespace Wooff.ECS.Contexts
 {
     public abstract class Context<T, T1> : IContext<T, T1> 
         where T : IContextItem

@@ -1,4 +1,4 @@
-using Wooff.ECS.Context;
+using Wooff.ECS.Contexts;
 using Wooff.ECS.Entities;
 
 namespace Wooff.ECS.Components

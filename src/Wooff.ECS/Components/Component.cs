@@ -1,7 +1,6 @@
-using Wooff.ECS.Components;
 using Wooff.ECS.Entities;
 
-namespace Wooff.ECS
+namespace Wooff.ECS.Components
 {
     public abstract class Component<T> : IComponent<T> where T : IConfig
     {
@@ -10,7 +9,7 @@ namespace Wooff.ECS
 
         public abstract int GetId();
 
-        public Component(T data, IEntity handler)
+        protected Component(T data, IEntity handler)
         {
             Config = data;
             Handler = handler;
