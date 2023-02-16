@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Wooff.ECS.Contexts
 {
-    public abstract class Context<T, T1> : IContext<T, T1> 
+    public class Context<T, T1> : IContext<T, T1> 
         where T : IContextItem
         where T1 : class, ICollection<T>, new()
     {
@@ -25,7 +25,7 @@ namespace Wooff.ECS.Contexts
             return Items.FirstOrDefault(x => x.GetType() == typeof(T2)) is not null;
         }
 
-        public T2? ContextGet<T2>() where T2 : class, T
+        public T2 ContextGet<T2>() where T2 : class, T
         {
             var item = Items.FirstOrDefault(x => x.GetType() == typeof(T2));
             return item as T2;
