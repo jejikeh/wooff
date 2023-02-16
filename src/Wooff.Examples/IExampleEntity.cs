@@ -1,6 +1,8 @@
+using Wooff.ECS.Entities;
+
 namespace Wooff.Examples;
 
-public interface IExampleEntity
+public interface IExampleEntity : IEntity<IExampleEntity>
 {
     
 }

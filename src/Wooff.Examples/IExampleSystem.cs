@@ -1,6 +1,8 @@
+using Wooff.ECS.Systems;
+
 namespace Wooff.Examples;
 
-public class IExampleSystem
+public interface IExampleSystem : ISystem<IExampleEntity>
 {
     
 }
