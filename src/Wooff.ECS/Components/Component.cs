@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Wooff.ECS.Entities;
 
 namespace Wooff.ECS.Components
@@ -6,11 +7,16 @@ namespace Wooff.ECS.Components
     {
         public T Config { get; private set; }
         public T1 Handler { get; private set; }
-
+        
         protected Component(T data, T1 handler)
         {
             Config = data;
             Handler = handler;
+        }
+
+        public virtual void OnRemove()
+        {
+            
         }
     }
 }
