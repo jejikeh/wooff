@@ -14,7 +14,7 @@ public class SpeadyMinimalIncrease : ECS.Systems.System
         foreach (var entity in negativeSeedEntity)
         {
             var speedy = entity.ContextGet<Speedy>();
-            speedy.Speed = 4;
+            speedy.Speed += 0.01f;
         }
     }
 }
