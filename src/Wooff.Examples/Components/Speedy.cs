@@ -2,9 +2,8 @@ using Wooff.ECS.Components;
 
 namespace Wooff.Examples.Components
 {
-    public class Information : IComponent
+    public class Speedy : IComponent
     {
-        public string Title { get; init; }
-        public string Description { get; init; }
+        public float Speed { get; set; }
     }
-}
+}   
