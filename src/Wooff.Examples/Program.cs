@@ -26,7 +26,7 @@ while (true)
 
     Console.WriteLine(6);
     var itemList = park.EntityContext.Items.FindAll(
-        x => x.ContextGet<Information>()?.Config.Description == "Vasya");
+        x => x.ContextGet<Information>().Config.Description == "Vasya");
     foreach(var item in itemList)
         park.EntityContext.ContextRemove(item);
 }
