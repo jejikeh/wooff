@@ -13,8 +13,8 @@ type HelloComponent struct {
 	Hello string
 }
 
-func NewHelloComponent(a gomemory.Arena, message string) *HelloComponent {
-	c := wooff.NewComponent[HelloComponent](a)
+func NewHelloComponent(ecs gomemory.Arena, message string) *HelloComponent {
+	c := wooff.NewComponent[HelloComponent](ecs)
 	c.Hello = message
 
 	return c
@@ -26,24 +26,23 @@ type HelloComponent2 struct {
 	Hello string
 }
 
-func NewHelloComponent2(a gomemory.Arena, message string) *HelloComponent2 {
-	c := wooff.NewComponent[HelloComponent2](a)
-
+func NewHelloComponent2(ecs gomemory.Arena, message string) *HelloComponent2 {
+	c := wooff.NewComponent[HelloComponent2](ecs)
 	c.Hello = message
 
 	return c
 }
 
 func main() {
-	a := gomemory.NewMallocArena(1024)
-	defer a.Free()
+	ecs := wooff.NewECS()
+	defer ecs.Free()
 
-	h := NewHelloComponent(a, "Hello World!")
+	h := NewHelloComponent(ecs, "Hello World!")
 
 	fmt.Printf("%s\n", h.Hello)
 	fmt.Printf("%v\n", wooff.GetComponentID[HelloComponent]())
 
-	h2 := NewHelloComponent2(a, "Hello World2")
+	h2 := NewHelloComponent2(ecs, "Hello World2")
 
 	fmt.Printf("%s\n", h2.Hello)
 	fmt.Printf("%v\n", wooff.GetComponentID[HelloComponent2]())

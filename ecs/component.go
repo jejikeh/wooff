@@ -16,14 +16,16 @@ type Component struct {
 }
 
 func NewComponent[T any](a gomemory.Arena) *T {
-	c := gomemory.New[T](a)
-	_, ok := componentIDs[fmt.Sprintf("%T", *c)]
+	component := gomemory.New[T](a)
+	cName := fmt.Sprintf("%T", *component)
+
+	_, ok := componentIDs[cName]
 	if !ok {
 		id := ComponentID(len(componentIDs))
-		componentIDs[fmt.Sprintf("%T", *c)] = id
+		componentIDs[cName] = id
 	}
 
-	return c
+	return component
 }
 
 func GetComponentID[T any]() ComponentID {
