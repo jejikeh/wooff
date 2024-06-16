@@ -3,47 +3,46 @@ package main
 import (
 	"fmt"
 
-	"github.com/jejikeh/gomemory"
-	wooff "github.com/jejikeh/wooff/ecs"
+	"github.com/jejikeh/wooff/ecs"
 )
 
 type HelloComponent struct {
-	wooff.Component
+	ecs.Component
 
 	Hello string
 }
 
-func NewHelloComponent(ecs gomemory.Arena, message string) *HelloComponent {
-	c := wooff.NewComponent[HelloComponent](ecs)
+func NewHelloComponent(e *ecs.ECS, message string) *HelloComponent {
+	c := ecs.NewComponent[HelloComponent](e)
 	c.Hello = message
 
 	return c
 }
 
 type HelloComponent2 struct {
-	wooff.Component
+	ecs.Component
 
 	Hello string
 }
 
-func NewHelloComponent2(ecs gomemory.Arena, message string) *HelloComponent2 {
-	c := wooff.NewComponent[HelloComponent2](ecs)
+func NewHelloComponent2(e *ecs.ECS, message string) *HelloComponent2 {
+	c := ecs.NewComponent[HelloComponent2](e)
 	c.Hello = message
 
 	return c
 }
 
 func main() {
-	ecs := wooff.NewECS()
-	defer ecs.Free()
+	mainECS := ecs.NewECS()
+	defer mainECS.Free()
 
-	h := NewHelloComponent(ecs, "Hello World!")
+	h := NewHelloComponent(mainECS, "Hello World!")
 
 	fmt.Printf("%s\n", h.Hello)
-	fmt.Printf("%v\n", wooff.GetComponentID[HelloComponent]())
+	fmt.Printf("%v\n", ecs.GetComponentID[HelloComponent]())
 
-	h2 := NewHelloComponent2(ecs, "Hello World2")
+	h2 := NewHelloComponent2(mainECS, "Hello World2")
 
 	fmt.Printf("%s\n", h2.Hello)
-	fmt.Printf("%v\n", wooff.GetComponentID[HelloComponent2]())
+	fmt.Printf("%v\n", ecs.GetComponentID[HelloComponent2]())
 }

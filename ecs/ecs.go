@@ -1,4 +1,4 @@
-package wooff
+package ecs
 
 import (
 	"github.com/jejikeh/gomemory"
@@ -7,18 +7,25 @@ import (
 const maxSize = 1024 * 1024
 
 type ECS struct {
-	Entities   map[EntityID]Entity
-	Components [][]*Component
+	Entities   map[EntityID]*Entity
+	Components map[EntityID][]*Component
 	Systems    []System
 
-	gomemory.MallocArena
+	componentsArena *gomemory.MallocArena
 }
 
 func NewECS() *ECS {
-	return &ECS{
-		Entities:    make(map[EntityID]Entity, 0),
-		Components:  make([][]*Component, 0),
-		Systems:     make([]System, 0),
-		MallocArena: *gomemory.NewMallocArena(maxSize),
+	ecs := &ECS{
+		Entities:        make(map[EntityID]*Entity, 0),
+		Components:      make(map[EntityID][]*Component, 0),
+		Systems:         make([]System, 0),
+		componentsArena: gomemory.NewMallocArena(maxSize),
 	}
+
+	return ecs
+}
+
+func (e *ECS) Free() {
+	// @Check.
+	e.componentsArena.Free()
 }

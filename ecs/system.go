@@ -1,4 +1,4 @@
-package wooff
+package ecs
 
 type System interface {
 	Update()

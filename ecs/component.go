@@ -1,4 +1,4 @@
-package wooff
+package ecs
 
 import (
 	"fmt"
@@ -8,15 +8,13 @@ import (
 
 type ComponentID uint32
 
+// @Incomplete.
 var componentIDs = make(map[string]ComponentID)
 
-type Component struct {
-	Owner EntityID
-	Index uint32
-}
+type Component interface{}
 
-func NewComponent[T any](a gomemory.Arena) *T {
-	component := gomemory.New[T](a)
+func NewComponent[T Component](ecs *ECS) *T {
+	component := gomemory.New[T](ecs.componentsArena)
 	cName := fmt.Sprintf("%T", *component)
 
 	_, ok := componentIDs[cName]
@@ -28,6 +26,6 @@ func NewComponent[T any](a gomemory.Arena) *T {
 	return component
 }
 
-func GetComponentID[T any]() ComponentID {
+func GetComponentID[T Component]() ComponentID {
 	return componentIDs[fmt.Sprintf("%T", *new(T))]
 }
