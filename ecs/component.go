@@ -1,31 +1,31 @@
 package ecs
 
-import (
-	"fmt"
+// import (
+// 	"fmt"
 
-	"github.com/jejikeh/gomemory"
-)
+// 	"github.com/jejikeh/gomemory"
+// )
 
-type ComponentID uint32
+// type ComponentID uint32
 
-// @Incomplete.
-var componentIDs = make(map[string]ComponentID)
+// // @Incomplete.
+// var componentIDs = make(map[string]ComponentID)
 
-type Component interface{}
+// type Component interface{}
 
-func NewComponent[T Component](ecs *ECS) *T {
-	component := gomemory.New[T](ecs.componentsArena)
-	cName := fmt.Sprintf("%T", *component)
+// func NewComponent[T Component](ecs *ECS) *T {
+// 	component := gomemory.New[T](ecs.componentsArena)
+// 	cName := fmt.Sprintf("%T", *component)
 
-	_, ok := componentIDs[cName]
-	if !ok {
-		id := ComponentID(len(componentIDs))
-		componentIDs[cName] = id
-	}
+// 	_, ok := componentIDs[cName]
+// 	if !ok {
+// 		id := ComponentID(len(componentIDs))
+// 		componentIDs[cName] = id
+// 	}
 
-	return component
-}
+// 	return component
+// }
 
-func GetComponentID[T Component]() ComponentID {
-	return componentIDs[fmt.Sprintf("%T", *new(T))]
-}
+// func GetComponentID[T Component]() ComponentID {
+// 	return componentIDs[fmt.Sprintf("%T", *new(T))]
+// }

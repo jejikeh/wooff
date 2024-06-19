@@ -1,2 +1,6 @@
 github.com/jejikeh/gomemory v0.0.0-20240614193130-2c5ec9289b16 h1:/XCcNyfFV11o6xyCfGAqQs1N9VOHY9+1tiSIrfexuYk=
 github.com/jejikeh/gomemory v0.0.0-20240614193130-2c5ec9289b16/go.mod h1:N6BSEGIcVKb8ylyKKnZpNnwMgR9mRoT9j83McB9JLBI=
+github.com/jejikeh/gomemory v0.0.0-20240618221007-d5ba437eddf6 h1:cXzL8p5UlhtLQCriFcwPKrH65H8RKmT2XTRwDqGZQiA=
+github.com/jejikeh/gomemory v0.0.0-20240618221007-d5ba437eddf6/go.mod h1:N6BSEGIcVKb8ylyKKnZpNnwMgR9mRoT9j83McB9JLBI=
+github.com/jejikeh/gomemory v0.0.0-20240619003816-64d1aba9a55a h1:zmqz872I0wvrrEkCYTuwNV+Okr7yg2xz+YUzdZkYVC0=
+github.com/jejikeh/gomemory v0.0.0-20240619003816-64d1aba9a55a/go.mod h1:N6BSEGIcVKb8ylyKKnZpNnwMgR9mRoT9j83McB9JLBI=

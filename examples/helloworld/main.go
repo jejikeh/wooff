@@ -1,48 +1,48 @@
 package main
 
-import (
-	"fmt"
+// import (
+// 	"fmt"
 
-	"github.com/jejikeh/wooff/ecs"
-)
+// 	"github.com/jejikeh/wooff/ecs"
+// )
 
-type HelloComponent struct {
-	ecs.Component
+// type (
+// 	EntityName string
+// 	PlayerTag  struct{}
+// )
 
-	Hello string
-}
+// type Transform struct {
+// 	X, Y, Z float64
+// }
 
-func NewHelloComponent(e *ecs.ECS, message string) *HelloComponent {
-	c := ecs.NewComponent[HelloComponent](e)
-	c.Hello = message
+// type EngineTime struct {
+// 	DeltaTime float64
+// }
 
-	return c
-}
+// func NewTransform(x, y, z float64) *Transform {
+// 	return &Transform{x, y, z}
+// }
 
-type HelloComponent2 struct {
-	ecs.Component
+// func main() {
+// 	engineLayer := ecs.NewLayer()
 
-	Hello string
-}
+// 	ecs.RegisterComponent[Transform](engineLayer)
+// 	ecs.RegisterComponent[PlayerTag](engineLayer)
 
-func NewHelloComponent2(e *ecs.ECS, message string) *HelloComponent2 {
-	c := ecs.NewComponent[HelloComponent2](e)
-	c.Hello = message
+// 	ecs.RegisterSingleton[EngineTime](engineLayer)
 
-	return c
-}
+// 	ecs.RegisterSystem()
 
-func main() {
-	mainECS := ecs.NewECS()
-	defer mainECS.Free()
+// 	engineTime := ecs.NewEntity(&EngineTime{})
+// 	player := ecs.NewEntity(NewTransform(1, 1, 1), &PlayerTag{}, EntityName("Player"))
+// }
 
-	h := NewHelloComponent(mainECS, "Hello World!")
+// type HandlePlayerMovement struct{}
 
-	fmt.Printf("%s\n", h.Hello)
-	fmt.Printf("%v\n", ecs.GetComponentID[HelloComponent]())
+// func (s *HandlePlayerMovement) Update(layer *ecs.Layer) {
+// 	dt, _ := ecs.GetSingleton[EngineTime](layer)
 
-	h2 := NewHelloComponent2(mainECS, "Hello World2")
-
-	fmt.Printf("%s\n", h2.Hello)
-	fmt.Printf("%v\n", ecs.GetComponentID[HelloComponent2]())
-}
+// 	for _, entity := range ecs.GetEntitiesWith[PlayerTag, Transform]() {
+// 		t := ecs.GetComponent[Transform](entity)
+// 	}
+// }
