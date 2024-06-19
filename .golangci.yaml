@@ -5,6 +5,7 @@ linters:
   - exhaustruct
   - gochecknoglobals
   - forbidigo
+  - lll
   
   presets:
   - bugs
