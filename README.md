@@ -1,7 +1,5 @@
-# woff
+# wooff
 
-wooff - Tiny Entity Component System library. 
+Wooff is a ECS library initially developed in C# back in 2023. This library was used in the development of [Confontation](https://github.com/jejikeh/Confrontation.git) with Unity.
 
-Wooff provides an easy and intuitive way of managing multiple components on entities. With the lightweight and powerful composition of components, you can quickly create complex and powerful elements in your project with ease.
-
-Wooff lets you create a persistent framework on which to build upon and its code size is so small that it can be easily maintained and integrated into most projects with ease.
+The development of this package has now been moved to [invaders](https://github.com/jejikeh/invaders) in Go.
