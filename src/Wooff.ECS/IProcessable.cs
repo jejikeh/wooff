@@ -5,7 +5,7 @@ namespace Wooff.ECS
         public void Process(float timeScale);
     }
 
-    public interface IProcessable<in T> 
+    public interface IProcessable<T> 
     {
         public void Process(float timeScale, T data);
     }

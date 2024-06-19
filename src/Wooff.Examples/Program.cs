@@ -1,57 +1,32 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
-using Wooff.ECS.Entities;
 using Wooff.Examples.Components;
-using Wooff.Examples.System;
+using Wooff.Examples.Entities;
 using Wooff.Examples.Worlds;
 
 var park = new Park();
-park.SystemContext.ContextAdd(new Speak());
-park.SystemContext.ContextAdd(new SpeadyMinimalIncrease());
-
-foreach (var _ in Enumerable.Range(0, 100))
+foreach (var _ in Enumerable.Range(0, 10))
 {
     park.EntityContext.ContextAdd(
-        new Entity(new Information
-        {
-            Title = "Vasya",
-            Description = "Fat cat"
-        },
-            new Speedy
-            {
-                Speed = -10f
-            }));
+        new Cat("Vasya", "Fat cat"));
 
     park.EntityContext.ContextAdd(
-        new Entity(new Information
-        {
-            Title = "Bobik",
-            Description = "Fit cat"
-        }, 
-            new Speedy()
-            {
-                Speed = 100f
-            }));
+        new Cat("Barsik", "Slim cat"));
 }
-
-var st = new Stopwatch();
-st.Start();
 
 while (true)
 {
-    park.SystemContext.Process(1f, park.EntityContext);
+    park.Update(1f);
+    var d = new Random().Next(0, 10);
+    if (d != 6)
+    {
+        Console.WriteLine(d);
+        continue;
+    }
 
     Console.WriteLine(6);
-    var itemList = park.EntityContext.ContextWhereQuery(
-        x => x.ContextGet<Information>()?.Title == "Vasya");
-
-    if (itemList.ToList().Count == 0)
-        break;
-    
-    foreach(var item in itemList.ToList())
+    var itemList = park.EntityContext.Items.FindAll(
+        x => x.ContextGet<Information>().Config.Description == "Vasya");
+    foreach(var item in itemList)
         park.EntityContext.ContextRemove(item);
 }
-
-st.Stop();
-Console.WriteLine(st.ElapsedMilliseconds);
